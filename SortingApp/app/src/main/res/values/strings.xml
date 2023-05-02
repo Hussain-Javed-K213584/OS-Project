@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Sorting Application</string>
+    <string name="app_name">Sorting-App</string>
+    <string-array name="algorithm_list">
+        <item>Merge Sort</item>
+        <item>Quick Sort</item>
+        <item>Radix Sort</item>
+    </string-array>
 </resources>

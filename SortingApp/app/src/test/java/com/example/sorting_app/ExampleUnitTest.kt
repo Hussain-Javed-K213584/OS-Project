@@ -1,4 +1,4 @@
-package com.example.sortingapplication
+package com.example.sorting_app
 
 import org.junit.Test
 
