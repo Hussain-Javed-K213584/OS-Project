@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity() {
         val time_text_view = findViewById<TextView>(R.id.time_text_view)
         val dropdown = findViewById<Spinner>(R.id.select_algo)
         val algorithm_used = findViewById<TextView>(R.id.algorithm_used)
+        val timeToFillTextView = findViewById<TextView>(R.id.time_to_fill_text_view)
         output_text_view.movementMethod = ScrollingMovementMethod()
         // This will set the spinner dropdown
         ArrayAdapter.createFromResource(
@@ -126,47 +127,74 @@ class MainActivity : AppCompatActivity() {
             dropdown.adapter = adapter
         }
 
-        val listener = dropdown.selectedItem.toString()
-        val threadBox = findViewById<CheckBox>(R.id.thread_check_box)
+        val listener = dropdown.selectedItem.toString() // This listener variable has our selected algorithm name
+        val threadBox = findViewById<CheckBox>(R.id.thread_check_box) // Get the id of thread box
         sort_button.setOnClickListener {
-            val size = input_field.text.toString().toInt()
+            /*
+                Once the user clicks the sort button, this block of code executes
+             */
+            val size = input_field.text.toString().toInt() // Parse the text received to int
             if (threadBox.isChecked)
             {
-                algorithm_used.text = "Algorithm Selected: Merge Sort"
-                val array = IntArray(size) { Random.nextInt(0, size) }
 
-                    val timeTaken = measureTimeMillis {
-                        //mergeSortMultiThreaded(array, 0, array.size - 1)
-                        val sortedArray = threadedMergeSort(array, 8)
-                        runOnUiThread {
-                            output_text_view.text = sortedArray[50].toString()
-                        }
-                    }.toFloat() / 1000
-
-                    runOnUiThread {
-                        time_text_view.text = "Time taken: ${"%.6f".format(timeTaken)}ms"
-                    }
+                // Create an array of the size specified and fill it with random variables
+                var array = IntArray(size){0}
+                val timeTakenToFillArray = measureTimeMillis {
+                    array = IntArray(size) { Random.nextInt(0, size) }
+                }.toFloat() / 1000
+                // Create a different array which will hold the sorted elements
+                var sortedArray: IntArray
+                // Time the sorting of the array, time in milliseconds is converted to seconds
+                val timeTaken = measureTimeMillis {
+                    sortedArray = threadedMergeSort(array, 8)
+                }.toFloat() / 1000
+                // Use a new array to print a limited number of elements
+                // printing millions of array crashes the app
+                var arrayToPrint = IntArray(2000){0}
+                for (i in 0..1000)
+                {
+                    arrayToPrint[i] = sortedArray[i]
+                }
+                runOnUiThread{
+                    timeToFillTextView.text = "Time taken to fill array: ${"%.6f".format(timeTakenToFillArray)}s"
+                }
+                runOnUiThread {
+                    output_text_view.text = arrayToPrint.joinToString()
+                }
+                runOnUiThread {
+                    time_text_view.text = "Time taken to sort array: ${"%.6f".format(timeTaken)}s"
+                }
+                runOnUiThread{
+                    // This block of code executes if the threaded version is selected
+                    algorithm_used.text = "Algorithm selected: Merge Sort"
+                }
 
             }
             else
             {
-                val array = IntArray(size) {_ ->
-                    Random.nextInt(0, size)
-                }
-
+                var array = IntArray(size) {0}
+                val timeTakenToFillArray = measureTimeMillis {
+                    array = IntArray(size) { Random.nextInt(0, size) }
+                }.toFloat() / 1000
                 val timeTaken = measureTimeMillis {
                     mergeSort(array, 0, array.size - 1)
                 }.toFloat() / 1000
-//                var arrayToPrint = Array(size){0}
-//                for (i in 0..1000)
-//                {
-//                    arrayToPrint[i] = array[i]
-//                }
-                runOnUiThread {
-                    output_text_view.text = array[50].toString()
+                var arrayToPrint = IntArray(2000){0}
+                for (i in 0..1000)
+                {
+                    arrayToPrint[i] = array[i]
                 }
                 runOnUiThread{
-                    time_text_view.text = "Time taken: ${"%.6f".format(timeTaken)}ms"
+                    timeToFillTextView.text = "Time taken to fill array: ${"%.6f".format(timeTakenToFillArray)}s"
+                }
+                runOnUiThread {
+                    output_text_view.text = arrayToPrint.joinToString()
+                }
+                runOnUiThread{
+                    time_text_view.text = "Time taken to sort array: ${"%.6f".format(timeTaken)}s"
+                }
+                runOnUiThread{
+                    algorithm_used.text = "Algorithm selected: Merge Sort"
                 }
 
             }
