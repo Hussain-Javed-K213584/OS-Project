@@ -22,7 +22,7 @@
 
     <Spinner
         android:id="@+id/select_algo"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:spinnerMode="dropdown"/>
 
@@ -38,13 +38,21 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="20sp"/>
-
+        android:textSize="20sp"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:lines="4"/>
     <TextView
         android:id="@+id/time_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/algorithm_used"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"/>
 </LinearLayout>
 
