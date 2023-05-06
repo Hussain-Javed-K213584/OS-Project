@@ -7,16 +7,9 @@ android {
     namespace 'com.example.sorting_app'
     compileSdk 33
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
-    }
-
     defaultConfig {
         externalNativeBuild {
             cmake {
-                cppFlags "-fopenmp"
                 arguments "-DANDROID_STL=c++_shared"
             }
         }

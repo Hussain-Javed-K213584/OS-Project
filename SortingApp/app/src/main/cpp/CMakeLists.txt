@@ -21,11 +21,13 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        native-lib.cpp)
+        native-lib.cpp
+
+        # Add another cpp file to hold the third sorting algorithm
+        third_sorting.cpp)
 
 add_library(native-lib SHARED native-lib.cpp)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp -static-openmp")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp -static-openmp")
+add_library(third_sorting SHARED third_sorting.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
