@@ -20,8 +20,6 @@ We can see from the above graph that as the size of our array increased the time
 
 ## Quick Sort Analysis
 
----
-
 This analysis was the most intriguing as the code for both the threaded and non-threaded versions of Quick Sort was written in C++ using Java Native Interface (JNI). We passed our kotlin array to C++ which converted the `jintArray` to a C++ compatible array which was sorted using Quick Sort.
 
 Below is a graph of Quick Sort Analysis:
@@ -32,8 +30,6 @@ There was a significant difference between the threaded and non-threaded version
 
 ## Sorting Analysis
 
----
-
 We finally compare both our sorting algorithms with their threaded and non-threaded versions and here is the output:
 ![sorting_analysis](images/sorting_analysis.png)
 *Fig 3) Shows a line graph of threaded and non-threaded versions of both Quick Sort and Merge Sort*
@@ -41,5 +37,4 @@ We finally compare both our sorting algorithms with their threaded and non-threa
 We can see that the threaded version of Quick Sort gave the most optimal performance since it ran natively using C++ and was compiled by the operating system, while the threaded version of Merge Sort was slower than the threaded version of Quick Sort because it ran on JVM which adds an extra layer between the of computing on the hardware.
 
 ## Conclusion
----
 We have seen the performance of our sorting algorithms with and without threads. We also analyzed the performance of native and non-native code and could see that using threads gave us a significant performance boost to using a sequential algorithm. We should also consider that if we write our algorithms in native code such as C++ we can improve the performance of our application significantly as compared to running the code on the JVM.
