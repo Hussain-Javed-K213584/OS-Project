@@ -1,7 +1,11 @@
 # Operating Systems Project Spring 2023
 ## Comparison of sorting algorithms in android using threads
-
-This project was undertaken by 3 studens from FAST National University. Our goal was to analyze the use of multiple threads in sorting algorithms. We wanted to see if android applications can utilize their multicore processors in speeding up the sorting time of arrays. We have implemented two sorting algorithms in this project, Merge Sort and Quick Sort. Both of these algorithms have their threaded and non-threaded versions. The merge sort algorithm was written in Kotlin while Quick Sort algorithm was written in C++.
+## Group members:
+1. 21k-4753 Vania Abbas
+2. 21k-3584 Hussain Javed
+3. 21k-3632 Lachman Das
+##Introduction
+This project was undertaken by three studens from FAST National University. Our goal was to analyze the use of multiple threads in sorting algorithms. We wanted to see if android applications can utilize their multicore processors in speeding up the sorting time of arrays. We have implemented two sorting algorithms in this project, Merge Sort and Quick Sort. Both of these algorithms have their threaded and non-threaded versions. The merge sort algorithm was written in Kotlin while Quick Sort algorithm was written in C++.
 
 ## Merge Sort
 
@@ -9,7 +13,7 @@ We first compared the threaded version of merge sort with the non threaded versi
 
 ![merge_sort_graph](images/merge_sort_analysis.png)
 
-We can see from the above graph that as the size of our array increased the time difference between the threaded and non-threaded version also increased. We were not able to test with more data due to either the limit of the android phone or due to a bug in the application as we could not create an array greater than 17 million integers. The divide and conquer approach of the merge sort algorithm is the reason we can see a difference in time between the threaded and non-threaded version of the algorithm. As the array size increased, the algorithm divided the arrays into subarrays between threads which resulted in quicker sorting. When sorting data of 10 million arrays we can see a 1 second difference between both the merge sort versions.
+We can see from the above graph that as the size of our array increased the time difference between the threaded and non-threaded version also increased. We were not able to test with more data due to either the limit of the android phone or due to a bug in the application as we could not create an array greater than 17 million integers. The divide and conquer approach of the merge sort algorithm is the reason we can see a difference in time between the threaded and non-threaded version of the algorithm. As the array size increased, the algorithm divided the arrays into subarrays between threads which resulted in quicker sorting. When sorting data of 10 million arrays we can see a one second difference between both the merge sort versions.
 
 ## Quick Sort Analysis
 
@@ -31,7 +35,7 @@ We finally compare both our sorting algorithms with their threaded and non-threa
 ![sorting_analysis](images/sorting_analysis.png)
 *Fig 3) Shows a line graph of threaded and non-threaded versions of both Quick Sort and Merge Sort*
 
-We can see that our threaded version of Quick Sort gave the most optimal performance since it ran natively using C++ and was compiled by the operating system, while the threaded version of Merge Sort was slower than the threaded version of Quick Sort because it ran on JVM which adds an extra layer between the of computing on the hardware.
+We can see that the threaded version of Quick Sort gave the most optimal performance since it ran natively using C++ and was compiled by the operating system, while the threaded version of Merge Sort was slower than the threaded version of Quick Sort because it ran on JVM which adds an extra layer between the of computing on the hardware.
 
 ## Conclusion
 ---
