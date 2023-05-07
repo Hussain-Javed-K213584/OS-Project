@@ -337,7 +337,7 @@ class MainActivity : AppCompatActivity() {
                     avgTimePrinter.text = "Average time to sort: ${"%.6f".format(averageTime)}s"
                 }
             }
-            else if (listener == "Quick Sort" && !threadBox.isChecked)
+            else if (listener == "Quick Sort")
             {
                 if (size < 5000)
                 {
@@ -351,9 +351,10 @@ class MainActivity : AppCompatActivity() {
                 val timeTakenToFillArray = measureTimeMillis{
                     initialArray = IntArray(size){Random.nextInt(0, size*2)}
                 }.toFloat() / 1000
-
+                var sortedArray:IntArray
                 val timeTakenToQuickSort = measureTimeMillis {
-                    quickSort(initialArray, 0, initialArray.size - 1)
+                   // quickSort(initialArray, 0, initialArray.size - 1)
+                    sortedArray = quickSortNonThreadedCPP(initialArray)
                 }.toFloat() / 1000
 
                 avgTimeToQuickSort.addAll(listOf(timeTakenToQuickSort))
@@ -361,7 +362,7 @@ class MainActivity : AppCompatActivity() {
 
                 var arrayToPrint = IntArray(50){0}
                 for (i in 0..arrayToPrint.size - 1){
-                    arrayToPrint[i] = initialArray[i]
+                    arrayToPrint[i] = sortedArray[i]
                 }
                 runOnUiThread{
                     output_text_view.text = arrayToPrint.joinToString()
@@ -372,65 +373,11 @@ class MainActivity : AppCompatActivity() {
                     avgTimePrinter.text = "Average time to sort: ${"%.6f".format(averageTime)}s"
                 }
             }
-            else if (listener == "Selection Sort" && threadBox.isChecked)
-            {
-                var initArray = IntArray(size){0}
-                val timeTakenToFill = measureTimeMillis{
-                    initArray = IntArray(size){Random.nextInt(0, size * 2)}
-                }.toFloat() / 1000
-                val timeTakenToSort = measureTimeMillis{
-                    runBlocking{
-                        launch{
-                            //bubbleSortParallel(initArray)
-                        }
-                    }
-
-                }.toFloat() / 1000
-                var arrayToPrint = IntArray(50){0}
-                for (i in 0..arrayToPrint.size-1)
-                {
-                    arrayToPrint[i] = initArray[i]
-                }
-                runOnUiThread{
-                    output_text_view.text = arrayToPrint.joinToString()
-                    time_text_view.text = "Time taken to sort: ${"%.6f".format(timeTakenToSort)}s"
-                    timeToFillTextView.text = "Time taken to fill array: ${"%.6f".format(timeTakenToFill)}"
-                    algorithm_used.text = listener
-                    wasThreadUsed.text = "Yes, thread count: 4"
-                }
-
-            }
-            else if (listener == "Selection Sort" && !threadBox.isChecked)
-            {
-                var initArr = IntArray(size) {0}
-                var timeToFillArr = measureTimeMillis {
-                    initArr = IntArray(size){Random.nextInt(0, size * 2)}
-                }.toFloat() / 1000
-
-                val timeTakenToSort = measureTimeMillis{
-//                    bubbleSort(initArr)
-                }.toFloat() / 1000
-
-                var toPrintArr = IntArray(50) {0}
-                for (i in 0 until toPrintArr.size - 1)
-                {
-                    toPrintArr[i] = initArr[i]
-                }
-
-                runOnUiThread{
-                    output_text_view.text = toPrintArr.joinToString()
-                    time_text_view.text = "Time taken to sort: ${"%.6f".format(timeTakenToSort)}s"
-                    timeToFillTextView.text = "Time taken to fill array: ${"%.6f".format(timeToFillArr)}s"
-                    algorithm_used.text = listener
-                    wasThreadUsed.text = "No"
-                }
-            }
-
         }
     }
 
     external fun sortArray(arr: IntArray): IntArray
-    external fun sortArrayThirdAlgorithm(arr: IntArray): IntArray
+    external fun quickSortNonThreadedCPP(arr: IntArray): IntArray
     companion object{
         init{
             System.loadLibrary("sorting_app")
