@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
         val avgTimePrinter = findViewById<TextView>(R.id.avg_time_text_view)
         output_text_view.movementMethod = ScrollingMovementMethod()
         // This will set the spinner dropdown
-        val mySortingList = listOf("Merge Sort", "Quick Sort")
+        val mySortingList = listOf("Merge Sort Kotlin", "Quick Sort C++")
 
         var avgTimeToSortMergeSortThreaded = LinkedList<Float>() // This will calculate avg time to sort using merge sort
         var avgTimeToSortQuickSortThreaded = LinkedList<Float>() // This will calculate avg time to sort using quick sort
@@ -212,7 +212,7 @@ class MainActivity : AppCompatActivity() {
                 avgTimeToSortQuickSortThreaded.clear()
             }
             oldSize = size
-            if (threadBox.isChecked && size >= 5000 && listener == "Merge Sort")
+            if (threadBox.isChecked && size >= 5000 && listener == "Merge Sort Kotlin")
             {
 
                 // Create an array of the size specified and fill it with random variables
@@ -267,7 +267,7 @@ class MainActivity : AppCompatActivity() {
                     avgTimePrinter.text = "Average time to sort: ${"%.6f".format(averageTimeToSort)}s"
                 }
             }
-            else if (listener == "Merge Sort")
+            else if (listener == "Merge Sort Kotlin")
             {
                 if (size < 5000)
                 {
@@ -311,7 +311,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            else if (listener == "Quick Sort" && threadBox.isChecked && size >= 5000)
+            else if (listener == "Quick Sort C++" && threadBox.isChecked && size >= 5000)
             {
                 var initialArray = IntArray(size){0}
                 val timeTakenToFillArray = measureTimeMillis {
@@ -337,7 +337,7 @@ class MainActivity : AppCompatActivity() {
                     avgTimePrinter.text = "Average time to sort: ${"%.6f".format(averageTime)}s"
                 }
             }
-            else if (listener == "Quick Sort")
+            else if (listener == "Quick Sort C++")
             {
                 if (size < 5000)
                 {
